@@ -1,26 +1,25 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="wrapper">
+    <main-header></main-header>
+    <div class="body-wrapper">
+      <tasks-list heading="Outstanding tasks"></tasks-list>
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import mainHeader from "./components/mainHeader.vue";
+import TasksList from "./components/tasksList.vue";
 
 export default {
   name: "App",
-  components: {
-    HelloWorld,
-  },
+  components: { mainHeader, TasksList },
 };
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="sass">
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
 </style>
