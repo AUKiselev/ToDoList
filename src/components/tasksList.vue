@@ -18,4 +18,8 @@ export default {
 };
 </script>
 
-<style scoped lang="sass"></style>
+<style scoped lang="sass">
+h2
+  font-family: "Nunito"
+  font-weight: 600
+</style>
