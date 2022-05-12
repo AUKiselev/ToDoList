@@ -1,10 +1,11 @@
 <template>
-  <h2>{{ heading }}</h2>
+  <h3 class="stats-element__heading">{{ heading }}</h3>
+  <div class="stats-element__content"></div>
 </template>
 
 <script>
 export default {
-  name: "tasks-list",
+  name: "stats-element",
 
   props: {
     heading: {
