@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
 
-const DELETED_TASK = -1;
+// const DELETED_TASK = -1;
 const ACTIVE_TASK = 0;
-const COMPLETED_TASK = 1;
+// const COMPLETED_TASK = 1;
 
 export const useTasksStore = defineStore("tasks", {
   state: () => {
@@ -38,7 +38,7 @@ export const useTasksStore = defineStore("tasks", {
   },
 
   actions: {
-    addTask(taskText) {
+    addNewTask(taskText) {
       this.tasks.push({ taskText, id: this.nextId++, taskState: ACTIVE_TASK });
     },
 

@@ -1,6 +1,12 @@
 <template>
-  <task-list heading="Активные задачи"></task-list>
-  <task-list heading="Завершенные задачи"></task-list>
+  <div class="tasks-block__wrapper">
+    <el-row>
+      <task-list heading="Активные задачи"></task-list>
+    </el-row>
+    <el-row>
+      <task-list heading="Завершенные задачи"></task-list>
+    </el-row>
+  </div>
 </template>
 
 <script>
@@ -13,4 +19,15 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped lang="sass">
+.tasks-block__wrapper
+  padding: 20px
+  display: flex
+  flex-direction: column
+  row-gap: 20px
+
+  background-color: #FFFFFF
+  box-shadow: 0px 10px 25px rgba(29, 52, 54, 0.08)
+
+  border-radius: 10px
+</style>
