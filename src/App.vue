@@ -40,7 +40,8 @@ export default {
 .wrapper
   margin: 0 auto
   padding: 20px 70px
-  max-width: 1000px
+  width: 100vw
+  height: 100vh
   background-color: #E5E5E5
 
 .el-row + *
