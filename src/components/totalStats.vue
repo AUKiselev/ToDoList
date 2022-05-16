@@ -10,12 +10,12 @@
 </template>
 
 <script>
-import statsElement from "./statsElement.vue";
+import StatsElement from "./StatsElement.vue";
 
 export default {
   name: "total-stats",
 
-  components: { statsElement },
+  components: { StatsElement },
 };
 </script>
 

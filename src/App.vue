@@ -1,28 +1,17 @@
 <template>
-  <add-task-modal v-model:isOpen="modalIsOpen"></add-task-modal>
-  <div class="wrapper">
-    <el-row>
-      <main-header @openModal="doOpenModal"></main-header>
-    </el-row>
-    <el-row>
-      <total-stats></total-stats>
-    </el-row>
-    <el-row>
-      <tasks-block></tasks-block>
-    </el-row>
-  </div>
+  <router-view></router-view>
 </template>
 
 <script>
-import tasksBlock from "./components/tasksBlock.vue";
-import totalStats from "./components/totalStats.vue";
-import mainHeader from "./components/mainHeader.vue";
-import addTaskModal from "./components/addTaskModal.vue";
+// import TasksBlock from "./components/TasksBlock.vue";
+// import TotalStats from "./components/TotalStats.vue";
+// import MainHeader from "./components/MainHeader.vue";
+// import AddTaskModal from "./components/AddTaskModal.vue";
 
 export default {
   name: "App",
 
-  components: { totalStats, tasksBlock, mainHeader, addTaskModal },
+  // components: { TotalStats, TasksBlock, MainHeader, AddTaskModal },
 
   data() {
     return { modalIsOpen: false };

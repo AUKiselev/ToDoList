@@ -10,12 +10,12 @@
 </template>
 
 <script>
-import taskList from "@/components/tasksList.vue";
+import TaskList from "@/components/TasksList.vue";
 
 export default {
   name: "tasks-block",
 
-  components: { taskList },
+  components: { TaskList },
 };
 </script>
 
