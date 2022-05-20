@@ -9,20 +9,30 @@
         <el-input
           class="modal__input"
           v-model="taskName"
+          ref="addTaskInput"
           placeholder="Название задачи"
         />
       </el-row>
       <el-row class="modal__footer">
         <el-button type="danger" @click="close">Отменить</el-button>
-        <el-button>Добавить</el-button>
+        <el-button @click="addTask">Добавить</el-button>
       </el-row>
     </div>
   </div>
 </template>
 
 <script>
+import { useTasksStore } from "@/store/tasks";
+
 export default {
   name: "add-task-modal",
+
+  setup() {
+    const store = useTasksStore();
+    const { tasks, addNewTask } = store;
+
+    return { tasks, addNewTask };
+  },
 
   props: {
     isOpen: {
@@ -35,14 +45,45 @@ export default {
     "update:isOpen": null,
   },
 
+  mounted() {
+    document.addEventListener("keydown", this.handleKeydown);
+  },
+
+  beforeUnmount() {
+    document.removeEventListener("keydown", this.handleKeydown);
+  },
+
   data() {
     return { taskName: "" };
+  },
+
+  computed: {
+    isTaskNameCorrect() {
+      return this.taskName != "";
+    },
   },
 
   methods: {
     close() {
       this.$emit("update:isOpen", false);
       this.taskName = "";
+    },
+
+    addTask() {
+      if (this.isTaskNameCorrect) {
+        this.addNewTask(this.taskName);
+        this.close();
+      }
+    },
+
+    handleKeydown(e) {
+      if (this.isOpen && e.key === "Escape") {
+        this.close();
+      }
+
+      if (e.key === "Enter") {
+        this.addTask();
+      }
     },
   },
 };
