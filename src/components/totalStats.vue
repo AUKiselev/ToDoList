@@ -1,21 +1,23 @@
 <template>
-  <el-row>
-    <h2 class="total-stats__heading">Общая статистика</h2>
-  </el-row>
-  <el-row class="roral-stats__content">
-    <stats-element
-      heading="Создано"
-      :state="$options.ACTIVE_TASK"
-    ></stats-element>
-    <stats-element
-      heading="Завершено"
-      :state="$options.COMPLETED_TASK"
-    ></stats-element>
-    <stats-element
-      heading="Удалено"
-      :state="$options.DELETED_TASK"
-    ></stats-element>
-  </el-row>
+  <div class="total-stats__wrapper">
+    <el-row>
+      <h2 class="total-stats__heading">Общая статистика</h2>
+    </el-row>
+    <el-row class="toral-stats__content">
+      <stats-element
+        heading="Создано"
+        :state="$options.ACTIVE_TASK"
+      ></stats-element>
+      <stats-element
+        heading="Завершено"
+        :state="$options.COMPLETED_TASK"
+      ></stats-element>
+      <stats-element
+        heading="Удалено"
+        :state="$options.DELETED_TASK"
+      ></stats-element>
+    </el-row>
+  </div>
 </template>
 
 <script>
@@ -32,4 +34,19 @@ export default {
 };
 </script>
 
-<style scoped lang="sass"></style>
+<style scoped lang="sass">
+.total-stats__wrapper
+  padding: 20px
+  display: flex
+  flex-direction: column
+  row-gap: 20px
+
+  background-color: #FFFFFF
+  box-shadow: 0px 10px 25px rgba(29, 52, 54, 0.08)
+
+  border-radius: 10px
+
+.toral-stats__content
+  display: flex
+  justify-content: space-between
+</style>
