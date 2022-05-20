@@ -15,9 +15,9 @@
 
 <script>
 import TasksBlock from "@/components/TasksBlock.vue";
-import TotalStats from "@/components/TotalStats.vue";
 import MainHeader from "@/components/MainHeader.vue";
 import AddTaskModal from "@/components/AddTaskModal.vue";
+import TotalStats from "@/components/TotalStats.vue";
 
 export default {
   name: "App",

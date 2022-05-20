@@ -3,36 +3,9 @@
 </template>
 
 <script>
-// import TasksBlock from "./components/TasksBlock.vue";
-// import TotalStats from "./components/TotalStats.vue";
-// import MainHeader from "./components/MainHeader.vue";
-// import AddTaskModal from "./components/AddTaskModal.vue";
-
 export default {
   name: "App",
-
-  // components: { TotalStats, TasksBlock, MainHeader, AddTaskModal },
-
-  data() {
-    return { modalIsOpen: false };
-  },
-
-  methods: {
-    doOpenModal() {
-      this.modalIsOpen = true;
-    },
-  },
 };
 </script>
 
-<style scoped lang="sass">
-.wrapper
-  margin: 0 auto
-  padding: 20px 70px
-  width: 100vw
-  height: 100vh
-  background-color: #E5E5E5
-
-.el-row + *
-  margin-top: 30px
-</style>
+<style></style>

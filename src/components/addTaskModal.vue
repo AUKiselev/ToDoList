@@ -66,7 +66,6 @@ export default {
 
     display: flex
     flex-direction: column
-    // justify-content: space-between
 
     background-color: #FFFFFF
     box-shadow: 0px 10px 25px rgba(29, 52, 54, 0.08)

@@ -3,9 +3,9 @@
     <h2 class="total-stats__heading">Общая статистика</h2>
   </el-row>
   <el-row class="roral-stats__content">
-    <stats-element heading="Создано"></stats-element>
-    <stats-element heading="Завершено"></stats-element>
-    <stats-element heading="Удалено"></stats-element>
+    <stats-element heading="Создано" state="-1"></stats-element>
+    <stats-element heading="Завершено" state="0"></stats-element>
+    <stats-element heading="Удалено" state="1"></stats-element>
   </el-row>
 </template>
 
