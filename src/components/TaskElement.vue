@@ -31,16 +31,16 @@ export default {
   border: 1px solid rgba(40, 40, 70, 0.1)
   border-radius: 10px
 
-.task-element__checkbox::before
-  content: ""
-  width: 20px
-  height: 20px
-  position: absolute
-  left: 15px
-  top: 15px
+// .task-element__checkbox::before
+//   content: ""
+//   width: 20px
+//   height: 20px
+//   position: absolute
+//   left: 15px
+//   top: 15px
 
-  border: 1px solid #29A19C
-  border-radius: 4px
+//   border: 1px solid #29A19C
+//   border-radius: 4px
 
 .task-element__content
   font-family: "Nunito"
