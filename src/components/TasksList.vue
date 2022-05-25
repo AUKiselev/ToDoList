@@ -5,6 +5,7 @@
       v-for="task in tasksList"
       :key="task.id"
       :taskContent="task.taskText"
+      v-model:taskState="task.taskState"
     />
   </div>
 </template>
@@ -41,12 +42,18 @@ export default {
     },
   },
 
+  mounted() {
+    this.tasksList = this.getTasksList(this.state);
+  },
+
   data() {
     return { tasksList: [] };
   },
 
-  mounted() {
-    this.tasksList = this.getTasksList(this.state);
+  methods: {
+    doCompleteTask() {
+      this.tasks.find();
+    },
   },
 
   watch: {

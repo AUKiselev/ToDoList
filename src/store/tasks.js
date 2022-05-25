@@ -1,24 +1,24 @@
 import { defineStore } from "pinia";
 
-// const DELETED_TASK = -1;
+const DELETED_TASK = -1;
 const ACTIVE_TASK = 0;
-// const COMPLETED_TASK = 1;
+const COMPLETED_TASK = 1;
 
 export const useTasksStore = defineStore("tasks", {
   state: () => ({
     tasks: [
-      { taskText: "test1", id: 1, taskState: 0 },
-      { taskText: "test2", id: 2, taskState: 0 },
-      { taskText: "test3", id: 3, taskState: 0 },
-      { taskText: "test4", id: 4, taskState: -1 },
-      { taskText: "test5", id: 5, taskState: -1 },
-      { taskText: "test6", id: 6, taskState: -1 },
-      { taskText: "test6", id: 6, taskState: -1 },
-      { taskText: "test7", id: 7, taskState: 1 },
-      { taskText: "test8", id: 8, taskState: 1 },
-      { taskText: "test9", id: 9, taskState: 1 },
-      { taskText: "test9", id: 9, taskState: 1 },
-      { taskText: "test9", id: 9, taskState: 1 },
+      { taskText: "test1", id: 0, taskState: ACTIVE_TASK },
+      { taskText: "test2", id: 1, taskState: ACTIVE_TASK },
+      { taskText: "test3", id: 2, taskState: ACTIVE_TASK },
+      { taskText: "test4", id: 3, taskState: DELETED_TASK },
+      { taskText: "test5", id: 4, taskState: DELETED_TASK },
+      { taskText: "test6", id: 5, taskState: DELETED_TASK },
+      { taskText: "test7", id: 6, taskState: DELETED_TASK },
+      { taskText: "test8", id: 7, taskState: COMPLETED_TASK },
+      { taskText: "test9", id: 8, taskState: COMPLETED_TASK },
+      { taskText: "test10", id: 9, taskState: COMPLETED_TASK },
+      { taskText: "test11", id: 10, taskState: COMPLETED_TASK },
+      { taskText: "test12", id: 11, taskState: COMPLETED_TASK },
     ],
   }),
 

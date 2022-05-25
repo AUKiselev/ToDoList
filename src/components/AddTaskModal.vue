@@ -86,6 +86,16 @@ export default {
       }
     },
   },
+
+  watch: {
+    isOpen() {
+      if (this.isOpen) {
+        setTimeout(() => {
+          this.$refs.addTaskInput.focus();
+        }, 0);
+      }
+    },
+  },
 };
 </script>
 
