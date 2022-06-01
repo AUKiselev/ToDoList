@@ -1,16 +1,10 @@
 <template>
   <div class="tasks-block__wrapper">
     <el-row>
-      <task-list
-        heading="Активные задачи"
-        :state="$options.ACTIVE_TASK"
-      ></task-list>
+      <task-list heading="Активные задачи" :state="true"></task-list>
     </el-row>
     <el-row>
-      <task-list
-        heading="Завершенные задачи"
-        :state="$options.COMPLETED_TASK"
-      ></task-list>
+      <task-list heading="Завершенные задачи" :state="false"></task-list>
     </el-row>
   </div>
 </template>

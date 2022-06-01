@@ -6,7 +6,7 @@
       ref="taskCompleteCheckbox"
       @click="changeCompletingTask"
     />
-    <span class="task-element__content"> {{ taskContent }}</span>
+    <span class="task-element__content"> {{ taskTitle }}</span>
     <el-button class="task-element__edit-button" title="Изменить">
       <el-icon>
         <Edit style="width: 18px; height: 18px; color: #282846"
@@ -15,7 +15,7 @@
     <el-button
       class="task-element__delete-button"
       title="Удалить"
-      @click="deleteTask"
+      @click="deleteCurrentTask"
     >
       <el-icon
         ><Delete style="width: 18px; height: 18px; color: #f05454"
@@ -25,19 +25,33 @@
 </template>
 
 <script>
+import { useTasksStore } from "@/store/tasks";
+
 export default {
   name: "task-element",
 
-  DELETED_TASK: -1,
+  setup() {
+    const tasksStore = useTasksStore();
+    const { removeTask } = tasksStore;
+
+    return { removeTask };
+  },
+
   ACTIVE_TASK: 0,
   COMPLETED_TASK: 1,
 
   props: {
-    taskContent: {
+    taskTitle: {
       type: String,
       required: true,
     },
+
     taskState: {
+      type: Boolean,
+      required: true,
+    },
+
+    taskId: {
       type: Number,
       required: true,
     },
@@ -65,8 +79,9 @@ export default {
       }
     },
 
-    deleteTask() {
-      this.$emit("update:taskState", this.$options.DELETED_TASK);
+    deleteCurrentTask() {
+      // this.$emit("update:taskState", this.$options.DELETED_TASK);
+      this.removeTask(this.taskId);
     },
   },
 };
@@ -121,19 +136,6 @@ export default {
   position: relative
   z-index: -1
   opacity: 0
-
-// .task-element__checkbox::before
-//   content: ""
-//   width: 20px
-//   height: 20px
-//   position: absolute
-//   top: 50%
-//   left: 50%
-//   transform: translate(-50%, -50%)
-//   cursor: pointer
-
-//   border: 2px solid #29A19C
-//   border-radius: 4px
 
 .task-element__content
   font-family: "Nunito"

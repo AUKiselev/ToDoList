@@ -2,16 +2,18 @@
   <h2>{{ heading }}</h2>
   <div class="tasks-list__content">
     <task-element
-      v-for="task in tasksList"
+      v-for="task in tasks"
       :key="task.id"
-      :taskContent="task.taskText"
-      v-model:taskState="task.taskState"
+      :taskTitle="task.title"
+      :taskId="task.id"
+      v-model:taskState="task.ready"
     />
   </div>
 </template>
 
 <script>
 import { useTasksStore } from "@/store/tasks";
+import { storeToRefs } from "pinia";
 import TaskElement from "@/components/TaskElement.vue";
 
 export default {
@@ -23,9 +25,10 @@ export default {
 
   setup() {
     const tasksStore = useTasksStore();
-    const { tasks, getTasksList } = tasksStore;
+    const { setTasks } = tasksStore;
+    const { tasks, getTasksList } = storeToRefs(tasksStore);
 
-    return { tasks, getTasksList };
+    return { tasks, getTasksList, setTasks };
   },
 
   components: { TaskElement },
@@ -37,17 +40,14 @@ export default {
     },
 
     state: {
-      type: Number,
+      type: Boolean,
       required: true,
     },
   },
 
   mounted() {
-    this.tasksList = this.getTasksList(this.state);
-  },
-
-  data() {
-    return { tasksList: [] };
+    this.setTasks();
+    console.log("i am too");
   },
 
   methods: {
@@ -56,14 +56,14 @@ export default {
     },
   },
 
-  watch: {
-    tasks: {
-      handler() {
-        this.tasksList = this.getTasksList(this.state);
-      },
-      deep: true,
-    },
-  },
+  // watch: {
+  //   tasks: {
+  //     handler() {
+  //       this.tasksList = this.getTasksList(this.state);
+  //     },
+  //     deep: true,
+  //   },
+  // },
 };
 </script>
 

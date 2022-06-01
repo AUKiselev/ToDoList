@@ -30,7 +30,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "authirization-view",
+
+  methods: {
+    onSubmit() {},
+  },
+};
 </script>
 
 <style lang="sass">
