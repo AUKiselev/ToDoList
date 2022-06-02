@@ -5,30 +5,34 @@
     </el-row>
     <el-row class="toral-stats__content">
       <stats-element
-        heading="Создано"
-        :state="$options.ACTIVE_TASK"
+        heading="Активно"
+        :tasksCounter="getActiveTasks.length"
       ></stats-element>
       <stats-element
         heading="Завершено"
-        :state="$options.COMPLETED_TASK"
-      ></stats-element>
-      <stats-element
-        heading="Удалено"
-        :state="$options.DELETED_TASK"
+        :tasksCounter="getCompletedTasks.length"
       ></stats-element>
     </el-row>
   </div>
 </template>
 
 <script>
+import { useTasksStore } from "@/store/tasks";
+import { storeToRefs } from "pinia";
 import StatsElement from "./StatsElement.vue";
 
 export default {
   name: "total-stats",
 
+  setup() {
+    const tasksStore = useTasksStore();
+    const { getActiveTasks, getCompletedTasks } = storeToRefs(tasksStore);
+
+    return { getActiveTasks, getCompletedTasks };
+  },
+
   components: { StatsElement },
 
-  DELETED_TASK: -1,
   ACTIVE_TASK: 0,
   COMPLETED_TASK: 1,
 };

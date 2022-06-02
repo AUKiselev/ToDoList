@@ -1,4 +1,8 @@
 <template>
+  <add-or-edit-task-modal
+    v-model:isOpen="modalIsOpen"
+    :task="task"
+  ></add-or-edit-task-modal>
   <div class="task-element__wrapper">
     <el-checkbox
       class="task-element__checkbox"
@@ -6,8 +10,12 @@
       ref="taskCompleteCheckbox"
       @click="changeCompletingTask"
     />
-    <span class="task-element__content"> {{ taskTitle }}</span>
-    <el-button class="task-element__edit-button" title="Изменить">
+    <span class="task-element__content"> {{ task.title }}</span>
+    <el-button
+      class="task-element__edit-button"
+      title="Изменить"
+      @click="modalIsOpen = true"
+    >
       <el-icon>
         <Edit style="width: 18px; height: 18px; color: #282846"
       /></el-icon>
@@ -26,33 +34,26 @@
 
 <script>
 import { useTasksStore } from "@/store/tasks";
+import AddOrEditTaskModal from "./AddOrEditTaskModal.vue";
 
 export default {
   name: "task-element",
 
   setup() {
     const tasksStore = useTasksStore();
-    const { removeTask } = tasksStore;
+    const { removeTask, toggleCompleteTask } = tasksStore;
 
-    return { removeTask };
+    return { removeTask, toggleCompleteTask };
   },
 
-  ACTIVE_TASK: 0,
-  COMPLETED_TASK: 1,
+  components: { AddOrEditTaskModal },
+
+  ACTIVE_TASK: false,
+  COMPLETED_TASK: true,
 
   props: {
-    taskTitle: {
-      type: String,
-      required: true,
-    },
-
-    taskState: {
-      type: Boolean,
-      required: true,
-    },
-
-    taskId: {
-      type: Number,
+    task: {
+      type: Object,
       required: true,
     },
   },
@@ -63,25 +64,28 @@ export default {
 
   computed: {
     isTaskCompleted() {
-      if (this.taskState === this.$options.COMPLETED_TASK) {
+      if (this.task.ready === this.$options.COMPLETED_TASK) {
         return true;
       }
       return false;
     },
   },
 
+  data() {
+    return { modalIsOpen: false };
+  },
+
   methods: {
     changeCompletingTask() {
-      if (!this.$refs.taskCompleteCheckbox?.isChecked) {
-        this.$emit("update:taskState", this.$options.COMPLETED_TASK);
-      } else if (this.$refs.taskCompleteCheckbox?.isChecked) {
-        this.$emit("update:taskState", this.$options.ACTIVE_TASK);
+      if (this.task.ready === this.$options.ACTIVE_TASK) {
+        this.toggleCompleteTask(this.task.id, this.$options.COMPLETED_TASK);
+      } else if (this.task.ready === this.$options.COMPLETED_TASK) {
+        this.toggleCompleteTask(this.task.id, this.$options.ACTIVE_TASK);
       }
     },
 
     deleteCurrentTask() {
-      // this.$emit("update:taskState", this.$options.DELETED_TASK);
-      this.removeTask(this.taskId);
+      this.removeTask(this.task.id);
     },
   },
 };

@@ -1,12 +1,17 @@
 <template>
   <h2>{{ heading }}</h2>
   <div class="tasks-list__content">
-    <task-element
-      v-for="task in tasks"
+    <!-- <task-element
+      v-for="task in filtredTasksList"
       :key="task.id"
       :taskTitle="task.title"
       :taskId="task.id"
       v-model:taskState="task.ready"
+    /> -->
+    <task-element
+      v-for="task in filtredTasksList"
+      :key="task.id"
+      :task="task"
     />
   </div>
 </template>
@@ -19,16 +24,15 @@ import TaskElement from "@/components/TaskElement.vue";
 export default {
   name: "tasks-list",
 
-  DELETED_TASK: -1,
   ACTIVE_TASK: 0,
   COMPLETED_TASK: 1,
 
   setup() {
     const tasksStore = useTasksStore();
     const { setTasks } = tasksStore;
-    const { tasks, getTasksList } = storeToRefs(tasksStore);
+    const { tasks } = storeToRefs(tasksStore);
 
-    return { tasks, getTasksList, setTasks };
+    return { tasks, setTasks };
   },
 
   components: { TaskElement },
@@ -39,8 +43,8 @@ export default {
       required: true,
     },
 
-    state: {
-      type: Boolean,
+    filtredTasksList: {
+      type: Array,
       required: true,
     },
   },
@@ -48,12 +52,6 @@ export default {
   mounted() {
     this.setTasks();
     console.log("i am too");
-  },
-
-  methods: {
-    doCompleteTask() {
-      this.tasks.find();
-    },
   },
 
   // watch: {

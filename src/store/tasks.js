@@ -1,8 +1,14 @@
 import { defineStore } from "pinia";
-import { getTasks, deleteTask } from "@/api/task";
+import {
+  getTasks,
+  deleteTask,
+  addTask,
+  doCompleteTask,
+  editTask,
+} from "@/api/task";
 
-const ACTIVE_TASK = 0;
-const COMPLETED_TASK = 1;
+const ACTIVE_TASK = false;
+const COMPLETED_TASK = true;
 
 export const useTasksStore = defineStore("tasks", {
   state: () => ({
@@ -10,35 +16,12 @@ export const useTasksStore = defineStore("tasks", {
   }),
 
   getters: {
-    // getActiveTasks(state) {
-    //   return state.tasks.filter((task) => {
-    //     task.taskState == ACTIVE_TASK;
-    //   });
-    // },
-
-    // getCompletedTasks(state) {
-    //   return state.tasks.filter((task) => {
-    //     task.taskState == COMPLETED_TASK;
-    //   });
-    // },
-
     getActiveTasks() {
-      return this.tasks.filter((value) => value.taskState === ACTIVE_TASK);
+      return this.tasks.filter((task) => task.ready === ACTIVE_TASK);
     },
 
     getCompletedTasks() {
-      return this.tasks.filter((value) => value.taskState === COMPLETED_TASK);
-    },
-
-    getTasksList(state) {
-      return (currentTaskState) =>
-        state.tasks.filter((task) => task.taskState === currentTaskState);
-    },
-
-    getTasksCounter(state) {
-      return (currentTaskState) =>
-        state.tasks.filter((task) => task.taskState === currentTaskState)
-          .length;
+      return this.tasks.filter((task) => task.ready === COMPLETED_TASK);
     },
   },
 
@@ -49,17 +32,24 @@ export const useTasksStore = defineStore("tasks", {
       console.log(this.tasks);
     },
 
-    addNewTask(taskText) {
-      this.tasks.push({
-        taskText,
-        id: this.tasks.length++,
-        taskState: ACTIVE_TASK,
-      });
-    },
-
     async removeTask(currentTaskID) {
       await deleteTask(currentTaskID);
-      // this.tasks.filter((task) => task != currentTask);
+      this.setTasks();
+    },
+
+    async addNewTask(ready = ACTIVE_TASK, title, user) {
+      await addTask(ready, title, user);
+      this.setTasks();
+    },
+
+    async toggleCompleteTask(currentTaskID, ready) {
+      await doCompleteTask(currentTaskID, ready);
+      this.setTasks();
+    },
+
+    async doEditTask(currentTaskID, title) {
+      await editTask(currentTaskID, title);
+      this.setTasks();
     },
   },
 });

@@ -1,5 +1,5 @@
 <template>
-  <add-task-modal v-model:isOpen="modalIsOpen"></add-task-modal>
+  <add-or-edit-task-modal v-model:isOpen="modalIsOpen"></add-or-edit-task-modal>
   <div class="wrapper">
     <el-row>
       <main-header @openModal="doOpenModal"></main-header>
@@ -16,13 +16,13 @@
 <script>
 import TasksBlock from "@/components/TasksBlock.vue";
 import MainHeader from "@/components/MainHeader.vue";
-import AddTaskModal from "@/components/AddTaskModal.vue";
+import AddOrEditTaskModal from "@/components/AddOrEditTaskModal.vue";
 import TotalStats from "@/components/TotalStats.vue";
 
 export default {
   name: "App",
 
-  components: { TotalStats, TasksBlock, MainHeader, AddTaskModal },
+  components: { TotalStats, TasksBlock, MainHeader, AddOrEditTaskModal },
 
   data() {
     return { modalIsOpen: false };

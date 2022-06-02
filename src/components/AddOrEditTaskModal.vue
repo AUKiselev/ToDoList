@@ -2,10 +2,12 @@
   <div class="modal" v-if="isOpen" @click="close">
     <div class="modal__content" @click.stop>
       <el-row>
-        <h2 class="modal__heading">Добавить новую задачу</h2>
+        <h2 v-if="isNewTask" class="modal__heading">Добавить новую задачу</h2>
+        <h2 v-else-if="!isNewTask" class="modal__heading">Изменить задачу</h2>
       </el-row>
       <el-row class="modal__main">
-        <p class="modal__what-to-do">Что нужно сделать?</p>
+        <p v-if="isNewTask" class="modal__what-to-do">Что нужно сделать?</p>
+        <p v-else-if="!isNewTask" class="modal__what-to-do">Название задачи</p>
         <el-input
           class="modal__input"
           v-model="taskName"
@@ -15,7 +17,8 @@
       </el-row>
       <el-row class="modal__footer">
         <el-button type="danger" @click="close">Отменить</el-button>
-        <el-button @click="addTask">Добавить</el-button>
+        <el-button v-if="isNewTask" @click="addTask">Добавить</el-button>
+        <el-button v-else-if="!isNewTask" @click="editTask">Изменить</el-button>
       </el-row>
     </div>
   </div>
@@ -25,19 +28,27 @@
 import { useTasksStore } from "@/store/tasks";
 
 export default {
-  name: "add-task-modal",
+  name: "add-or-edit-task-modal",
 
   setup() {
     const store = useTasksStore();
-    const { tasks, addNewTask } = store;
+    const { addNewTask, doEditTask } = store;
 
-    return { tasks, addNewTask };
+    return { addNewTask, doEditTask };
   },
+
+  ACTIVE_TASK: false,
+  COMPLETED_TASK: true,
 
   props: {
     isOpen: {
       type: Boolean,
       required: true,
+    },
+
+    task: {
+      type: Object,
+      required: false,
     },
   },
 
@@ -61,6 +72,14 @@ export default {
     isTaskNameCorrect() {
       return this.taskName != "";
     },
+
+    isNewTask() {
+      if (!this.task) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
 
   methods: {
@@ -71,7 +90,14 @@ export default {
 
     addTask() {
       if (this.isTaskNameCorrect) {
-        this.addNewTask(this.taskName);
+        this.addNewTask(this.$options.ACTIVE_TASK, this.taskName, 1);
+        this.close();
+      }
+    },
+
+    editTask() {
+      if (this.isTaskNameCorrect) {
+        this.doEditTask(this.task?.id, this.taskName);
         this.close();
       }
     },
@@ -90,6 +116,7 @@ export default {
   watch: {
     isOpen() {
       if (this.isOpen) {
+        this.taskName = this.task?.title;
         setTimeout(() => {
           this.$refs.addTaskInput.focus();
         }, 0);

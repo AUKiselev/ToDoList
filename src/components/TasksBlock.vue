@@ -1,23 +1,36 @@
 <template>
   <div class="tasks-block__wrapper">
     <el-row>
-      <task-list heading="Активные задачи" :state="true"></task-list>
+      <task-list
+        heading="Активные задачи"
+        :filtredTasksList="getActiveTasks"
+      ></task-list>
     </el-row>
     <el-row>
-      <task-list heading="Завершенные задачи" :state="false"></task-list>
+      <task-list
+        heading="Завершенные задачи"
+        :filtredTasksList="getCompletedTasks"
+      ></task-list>
     </el-row>
   </div>
 </template>
 
 <script>
+import { useTasksStore } from "@/store/tasks";
+import { storeToRefs } from "pinia";
 import TaskList from "@/components/TasksList.vue";
 
 export default {
   name: "tasks-block",
 
-  DELETED_TASK: -1,
-  ACTIVE_TASK: 0,
-  COMPLETED_TASK: 1,
+  setup() {
+    const tasksStore = useTasksStore();
+    // const { getActiveTasks, getCompletedTasks } = tasksStore;
+    const { tasks, getActiveTasks, getCompletedTasks } =
+      storeToRefs(tasksStore);
+
+    return { tasks, getActiveTasks, getCompletedTasks };
+  },
 
   components: { TaskList },
 };
