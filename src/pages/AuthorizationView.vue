@@ -5,12 +5,22 @@
         <h2 class="auth__heading">Вход в аккаунт</h2>
       </el-row>
       <el-row style="width: 100%">
-        <el-form class="auth__auth-form">
+        <el-form :model="authForm" class="auth__auth-form">
           <el-form-item>
-            <el-input class="auth__input" placeholder="E-mail"></el-input>
+            <el-input
+              v-model="authForm.email"
+              type="email"
+              class="auth__input"
+              placeholder="E-mail"
+            ></el-input>
           </el-form-item>
           <el-form-item>
-            <el-input class="auth__input" placeholder="Пароль"></el-input>
+            <el-input
+              v-model="authForm.password"
+              type="password"
+              class="auth__input"
+              placeholder="Пароль"
+            ></el-input>
           </el-form-item>
           <el-form-item>
             <el-button class="auth__submit-button" @click="onSubmit"
@@ -20,7 +30,7 @@
         </el-form>
       </el-row>
       <el-row>
-        <span class="auth__registration"
+        <span class="auth__registration-span"
           >Еще нет аккаунта?
           <a href="#" class="auth__registration-link">Регистрация</a></span
         >
@@ -32,6 +42,15 @@
 <script>
 export default {
   name: "authirization-view",
+
+  data() {
+    return {
+      authForm: {
+        email: "",
+        password: "",
+      },
+    };
+  },
 
   methods: {
     onSubmit() {},
@@ -63,9 +82,6 @@ export default {
   box-shadow: 0px 10px 25px rgba(29, 52, 54, 0.08)
   border-radius: 10px
 
-.auth__auth-form
-  width: 100%
-
 .el-form-item + *
   margin-top: 20px
 
@@ -81,7 +97,7 @@ export default {
   margin: 0 50%
   transform: translateX(-50%)
 
-.auth__registration
+.auth__registration-span
   font-family: "Nunito"
   font-weight: 400
   font-size: 12px

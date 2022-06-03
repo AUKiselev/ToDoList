@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import MainPage from "@/pages/MainPage.vue";
 import AuthorizationView from "@/pages/AuthorizationView.vue";
+import RegistrationView from "@/pages/RegistrationView.vue";
 
 const routes = [
   {
@@ -10,6 +11,10 @@ const routes = [
   {
     path: "/auth",
     component: AuthorizationView,
+  },
+  {
+    path: "/registration",
+    component: RegistrationView,
   },
 ];
 
