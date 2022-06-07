@@ -42,7 +42,7 @@ export default {
   padding: 20px 70px
   width: 100vw
   height: 100vh
-  background-color: #E5E5E5
+  background-color: $gray-background
 
 .el-row + *
   margin-top: 30px

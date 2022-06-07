@@ -46,6 +46,8 @@
           </el-form-item>
         </el-row>
       </el-form>
+
+      <router-link :to="{ name: 'mainPage' }">Войти</router-link>
     </div>
   </div>
 </template>
@@ -75,7 +77,7 @@ export default {
 .wrapper
   width: 100vw
   height: 100vh
-  background-color: #E5E5E5
+  background-color: $gray-background
 
 .registration__wrapper
   min-width: 700px
@@ -85,14 +87,14 @@ export default {
   justify-content: space-between
   align-items: center
   row-gap: 20px
-  background-color: #FFFFFF
+  background-color: $white
 
   position: absolute
   top: 50%
   left: 50%
   transform: translate(-50%, -50%)
 
-  box-shadow: 0px 10px 25px rgba(29, 52, 54, 0.08)
+  box-shadow: $wrapper-box-shadow
   border-radius: 10px
 
 .registration__input .el-input__inner
@@ -100,17 +102,17 @@ export default {
   width: 100%
   height: 35px
 
-  border: 1px solid rgba(40, 40, 70, 0.1)
+  border: $element-border
   border-radius: 8px
 
 .registration__wrapper .el-form-item__label
   margin-left: 10px
 
-  font-family: "Nunito"
-  font-size: 16px
+  font-family: $nunito
+  font-size: $fz16
   line-height: 18px
-  font-weight: 600
-  color: #29A19C
+  font-weight: $fw600
+  color: $main-elements-color
 
 .registration__wrapper .el-form-item__content
   margin-top: 10px

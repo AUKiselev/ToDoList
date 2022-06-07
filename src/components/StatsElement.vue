@@ -13,18 +13,8 @@
 </template>
 
 <script>
-// import { useTasksStore } from "@/store/tasks";
-
 export default {
   name: "stats-element",
-
-  // setup() {
-  //   const tasksStore = useTasksStore();
-
-  //   const { tasks, getTasksCounter } = tasksStore;
-
-  //   return { tasks, getTasksCounter };
-  // },
 
   props: {
     heading: {
@@ -37,32 +27,23 @@ export default {
       required: true,
     },
   },
-
-  // watch: {
-  //   tasks: {
-  //     handler() {
-  //       this.tasksCounter = this.getTasksCounter(this.state);
-  //     },
-  //     deep: true,
-  //   },
-  // },
 };
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
 .stats-element__wrapper
   display: flex
   flex-direction: column
   align-items: center
   row-gap: 10px
 
-  font-family: "Nunito"
+  font-family: $nunito
 
 .stats-element__heading
-  font-weight: 600
-  font-size: 12px
+  font-weight: $fw600
+  font-size: $fz12
   line-height: 16px
-  color: #282846
+  color: $main-text-color
 
 
 .stats-element__circle-wrapper
@@ -73,19 +54,19 @@ export default {
   justify-content: center
   align-items: center
 
-  border: 1px solid #29A19C
+  border: 1px solid $main-elements-color
   border-radius: 200px
 
 .stats-element__counter
-  font-weight: 600
-  font-size: 36px
+  font-weight: $fw600
+  font-size: $fz36
   line-height: 49px
   letter-spacing: 0.02em
-  color: #29A19C
+  color: $main-elements-color
 
 .stats-element__addition
-  font-weight: 400
-  font-size: 12px
+  font-weight: $fw400
+  font-size: $fz12
   line-height: 16px
-  color: #282846
+  color: $main-text-color
 </style>

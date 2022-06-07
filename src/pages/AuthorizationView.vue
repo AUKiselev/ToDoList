@@ -32,8 +32,12 @@
       <el-row>
         <span class="auth__registration-span"
           >Еще нет аккаунта?
-          <a href="#" class="auth__registration-link">Регистрация</a></span
-        >
+          <router-link
+            class="auth__registration-link"
+            :to="{ name: 'registration' }"
+            >Регистрация</router-link
+          >
+        </span>
       </el-row>
     </div>
   </div>
@@ -62,7 +66,7 @@ export default {
 .wrapper
   width: 100vw
   height: 100vh
-  background-color: #E5E5E5
+  background-color: $gray-background
 
 .auth__wrapper
   min-width: 700px
@@ -72,38 +76,30 @@ export default {
   justify-content: space-between
   align-items: center
   row-gap: 20px
-  background-color: #FFFFFF
+  background-color: $white
 
   position: absolute
   top: 50%
   left: 50%
   transform: translate(-50%, -50%)
 
-  box-shadow: 0px 10px 25px rgba(29, 52, 54, 0.08)
+  box-shadow: $wrapper-box-shadow
   border-radius: 10px
 
 .el-form-item + *
   margin-top: 20px
-
-.auth__input .el-input__inner
-  padding: 10px 15px
-  width: 100%
-  height: 35px
-
-  border: 1px solid rgba(40, 40, 70, 0.1)
-  border-radius: 8px
 
 .auth__submit-button
   margin: 0 50%
   transform: translateX(-50%)
 
 .auth__registration-span
-  font-family: "Nunito"
-  font-weight: 400
-  font-size: 12px
+  font-family: $nunito
+  font-weight: $fw400
+  font-size: $fz12
   line-height: 16px
-  color: #000000
+  color: $black
 
 .auth__registration-link
-  color: #29A19C
+  color: $main-elements-color
 </style>

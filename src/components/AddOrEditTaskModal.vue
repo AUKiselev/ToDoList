@@ -129,6 +129,7 @@ export default {
 <style lang="sass">
 .modal
   position: fixed
+  z-index: 5
   top: 0
   right: 0
   bottom: 0
@@ -145,8 +146,8 @@ export default {
     display: flex
     flex-direction: column
 
-    background-color: #FFFFFF
-    box-shadow: 0px 10px 25px rgba(29, 52, 54, 0.08)
+    background-color: $white
+    box-shadow: $wrapper-box-shadow
 
     border-radius: 10px
 
@@ -154,19 +155,11 @@ export default {
     margin-top: 30px
 
   &__what-to-do
-    font-family: "Nunito"
-    font-weight: 700
-    font-size: 14px
+    font-family: $nunito
+    font-weight: $fw700
+    font-size: $fz14
     line-height: 19px
-    color: #282846
-
-.modal__input .el-input__inner
-  padding: 8px 15px
-  width: 100%
-  height: 35px
-
-  border: 1px solid rgba(40, 40, 70, 0.1)
-  border-radius: 8px
+    color: $main-text-color
 
 .modal__what-to-do + *
   margin-top: 10px

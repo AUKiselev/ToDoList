@@ -25,7 +25,6 @@ export default {
 
   setup() {
     const tasksStore = useTasksStore();
-    // const { getActiveTasks, getCompletedTasks } = tasksStore;
     const { tasks, getActiveTasks, getCompletedTasks } =
       storeToRefs(tasksStore);
 
@@ -44,8 +43,8 @@ export default {
   flex-direction: column
   row-gap: 20px
 
-  background-color: #FFFFFF
-  box-shadow: 0px 10px 25px rgba(29, 52, 54, 0.08)
+  background-color: $white
+  box-shadow: $wrapper-box-shadow
 
   border-radius: 10px
 

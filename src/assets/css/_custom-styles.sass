@@ -2,41 +2,52 @@
 //   font-size: 20px
 
 h2
-  font-family: "Nunito"
-  font-weight: 600
-  font-size: 18px
-  color: #29A19C
+  font-family: $nunito
+  font-weight: $fw600
+  font-size: $fz18
+  color: $main-elements-color
 
 h2 + *
   margin-top: 20px
 
+.wrapper
+  color: $gray-background
+
 .el-button
   padding: 10px 25px
-  background-color: #29A19C
+  background-color: $main-elements-color
 
-  font-family: "Nunito"
-  font-size: 16px
-  font-weight: 600
+  font-family: $nunito
+  font-size: $fz16
+  font-weight: $fw600
   line-height: 22px
-  color: #FAFAFA
+  color: $white-button-text
 
-  border: 1px solid #FAFAFA
+  border: 1px solid $white-button-text
   border-radius: 8px
 
   cursor: pointer
   transition: background-color 0.2s, color 0.2s, border 0.2s
 
   &--danger
-    background-color: #F05454
+    background-color: $danger-red
 
   &:active
-    background-color: #FAFAFA
-    color: #29A19C
-    border: 1px solid #29A19C
+    background-color: $white-button-text
+    color: $main-elements-color
+    border: 1px solid $main-elements-color
 
   &--danger:active
-    color: #F05454
-    border: 1px solid #F05454
+    color: $danger-red
+    border: 1px solid $danger-red
 
-input:focus
-  outline: 2px solid #29A19C
+.el-input__inner
+  padding: 8px 15px
+  width: 100%
+  height: 35px
+
+  border: 1px solid $input-border-color
+  border-radius: 8px
+
+*:focus
+  outline: 2px solid $main-elements-color

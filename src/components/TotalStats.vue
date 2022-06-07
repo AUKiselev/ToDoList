@@ -45,7 +45,7 @@ export default {
   flex-direction: column
   row-gap: 20px
 
-  background-color: #FFFFFF
+  background-color: $white
   box-shadow: 0px 10px 25px rgba(29, 52, 54, 0.08)
 
   border-radius: 10px

@@ -1,13 +1,6 @@
 <template>
   <h2>{{ heading }}</h2>
   <div class="tasks-list__content">
-    <!-- <task-element
-      v-for="task in filtredTasksList"
-      :key="task.id"
-      :taskTitle="task.title"
-      :taskId="task.id"
-      v-model:taskState="task.ready"
-    /> -->
     <task-element
       v-for="task in filtredTasksList"
       :key="task.id"
@@ -53,15 +46,6 @@ export default {
     this.setTasks();
     console.log("i am too");
   },
-
-  // watch: {
-  //   tasks: {
-  //     handler() {
-  //       this.tasksList = this.getTasksList(this.state);
-  //     },
-  //     deep: true,
-  //   },
-  // },
 };
 </script>
 

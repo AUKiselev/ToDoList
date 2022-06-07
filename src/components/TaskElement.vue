@@ -99,13 +99,13 @@ export default {
   justify-content: flex-start
   column-gap: 10px
 
-  background-color: #FFFFFF
-  border: 1px solid rgba(40, 40, 70, 0.1)
+  background-color: $white
+  border: $element-border
   border-radius: 10px
 
 // Animations-style start
 .task-element__wrapper:hover
-  border: 1px solid rgba(40, 40, 70, 0.3)
+  border: $element-border-hovered
   transition: border 0.4s
 
 .task-element__wrapper:hover .task-element__checkbox,
@@ -126,7 +126,7 @@ export default {
   width: 20px
   height: 20px
 
-  border: 1px solid #29A19C
+  border: 1px solid $main-elements-color
   border-radius: 4px
 
   cursor: pointer
@@ -142,11 +142,11 @@ export default {
   opacity: 0
 
 .task-element__content
-  font-family: "Nunito"
-  font-weight: 400
-  font-size: 14px
+  font-family: $nunito
+  font-weight: $fw400
+  font-size: $fz14
   line-height: 19px
-  color: #282846
+  color: $main-text-color
 
 .task-element__edit-button
   margin-left: auto
@@ -156,7 +156,7 @@ export default {
   height: 18px
   width: 18px
 
-  background-color: #FFFFFF !important
+  background-color: $white !important
 
   border-radius: 0 !important
 
