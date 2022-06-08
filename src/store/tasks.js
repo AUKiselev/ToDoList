@@ -29,7 +29,6 @@ export const useTasksStore = defineStore("tasks", {
     async setTasks() {
       const tasksList = await getTasks();
       this.tasks = tasksList;
-      console.log(this.tasks);
     },
 
     async removeTask(currentTaskID) {

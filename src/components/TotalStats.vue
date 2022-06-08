@@ -32,9 +32,6 @@ export default {
   },
 
   components: { StatsElement },
-
-  ACTIVE_TASK: 0,
-  COMPLETED_TASK: 1,
 };
 </script>
 

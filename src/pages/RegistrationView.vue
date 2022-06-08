@@ -8,7 +8,7 @@
         <el-row>
           <el-form-item label="Ваше имя">
             <el-input
-              v-model="registrationForm.name"
+              v-model="registrationForm.username"
               class="registration__input"
               placeholder="Введите имя"
             />
@@ -46,20 +46,28 @@
           </el-form-item>
         </el-row>
       </el-form>
-
-      <router-link :to="{ name: 'mainPage' }">Войти</router-link>
     </div>
   </div>
 </template>
 
 <script>
+import { useUserStore } from "@/store/user";
+// import { storeToRefs } from "pinia";
+
 export default {
   name: "registration-viev",
+
+  setup() {
+    const userStore = useUserStore();
+    const { registration, getToken } = userStore;
+
+    return { registration, getToken };
+  },
 
   data() {
     return {
       registrationForm: {
-        name: "",
+        username: "",
         email: "",
         password: "",
         repeatPass: "",
@@ -67,8 +75,22 @@ export default {
     };
   },
 
+  // computed: {
+  //   passIsMatch() {
+  //     return this.password === this.repeatPass || this.password;
+  //   },
+  // },
+
   methods: {
-    onSubmit() {},
+    async onSubmit() {
+      await this.registration(
+        this.registrationForm.email,
+        this.registrationForm.username,
+        this.registrationForm.password
+      ).then((resolve) => {
+        this.getToken(resolve.username, resolve.password);
+      });
+    },
   },
 };
 </script>

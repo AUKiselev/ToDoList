@@ -44,7 +44,6 @@ export default {
 
   mounted() {
     this.setTasks();
-    console.log("i am too");
   },
 };
 </script>

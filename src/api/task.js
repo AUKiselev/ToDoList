@@ -2,7 +2,6 @@ import { api } from "./axios";
 
 export const getTasks = async () => {
   try {
-    console.log("I am here");
     const response = await api.get("task/");
     return response.data;
   } catch (error) {
