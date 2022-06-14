@@ -41,9 +41,9 @@ export const useTasksStore = defineStore("tasks", {
       });
     },
 
-    async addNewTask(ready = ACTIVE_TASK, title, user, accessToken) {
+    async addNewTask(ready = ACTIVE_TASK, title, userID, accessToken) {
       console.log(accessToken);
-      await addTask(ready, title, user, accessToken).then(() => {
+      await addTask(ready, title, userID, accessToken).then(() => {
         this.setTasks(accessToken);
       });
     },

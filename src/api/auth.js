@@ -41,3 +41,14 @@ export const verifyToken = async (token) => {
     console.error(error.response.data);
   }
 };
+
+export const getUserData = async (accessToken) => {
+  try {
+    const response = await api.get("users/me/", {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error.response.data);
+  }
+};

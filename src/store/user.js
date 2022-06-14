@@ -1,11 +1,29 @@
-import { registrationUser, getJwtToken } from "@/api/auth";
+import { registrationUser, getJwtToken, getUserData } from "@/api/auth";
 import { defineStore } from "pinia";
 
 export const useUserStore = defineStore("auth", {
   state: () => ({
     accessToken: "",
     refreshToken: "",
+    username: "",
+    userID: "",
   }),
+
+  getters: {
+    async getUsername() {
+      if (this.accessToken) {
+        const { username } = await getUserData(this.accessToken);
+        this.username = username;
+      }
+    },
+
+    async getUserID() {
+      if (this.accessToken) {
+        const { id } = await getUserData(this.accessToken);
+        this.userID = id;
+      }
+    },
+  },
 
   actions: {
     async registration(email, username, password) {

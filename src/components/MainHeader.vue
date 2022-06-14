@@ -2,7 +2,7 @@
   <el-row class="main-header">
     <el-button @click="showModal">Новая задача</el-button>
     <div class="user-block">
-      <span class="user-block__username">Хорошего дня, %username%</span>
+      <span class="user-block__username">Хорошего дня, {{ username }}</span>
       <nav class="user-block__settings">
         <el-icon>
           <ArrowDown style="width: 18px; height: 18px; color: #29a19c"
@@ -17,8 +17,18 @@
 </template>
 
 <script>
+import { useUserStore } from "@/store/user";
+import { storeToRefs } from "pinia";
+
 export default {
   name: "main-header",
+
+  setup() {
+    const userStore = useUserStore();
+    const { username } = storeToRefs(userStore);
+
+    return { username };
+  },
 
   emits: {
     openModal: null,

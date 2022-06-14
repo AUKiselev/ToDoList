@@ -16,9 +16,18 @@
         />
       </el-row>
       <el-row class="modal__footer">
-        <el-button type="danger" @click="close">Отменить</el-button>
-        <el-button v-if="isNewTask" @click="addTask">Добавить</el-button>
-        <el-button v-else-if="!isNewTask" @click="editTask">Изменить</el-button>
+        <el-button type="danger" @keydown.esc="close" @click="close"
+          >Отменить</el-button
+        >
+        <el-button v-if="isNewTask" @keydown.enter="addTask" @click="addTask"
+          >Добавить</el-button
+        >
+        <el-button
+          v-else-if="!isNewTask"
+          @keydown.enter="editTask"
+          @click="editTask"
+          >Изменить</el-button
+        >
       </el-row>
     </div>
   </div>
@@ -35,10 +44,10 @@ export default {
   setup() {
     const tasksStore = useTasksStore();
     const userStore = useUserStore();
-    const { accessToken } = storeToRefs(userStore);
+    const { accessToken, userID } = storeToRefs(userStore);
     const { addNewTask, doEditTask } = tasksStore;
 
-    return { addNewTask, doEditTask, accessToken };
+    return { accessToken, userID, addNewTask, doEditTask };
   },
 
   ACTIVE_TASK: false,
@@ -58,14 +67,6 @@ export default {
 
   emits: {
     "update:isOpen": null,
-  },
-
-  mounted() {
-    document.addEventListener("keydown", this.handleKeydown);
-  },
-
-  beforeUnmount() {
-    document.removeEventListener("keydown", this.handleKeydown);
   },
 
   data() {
@@ -97,7 +98,7 @@ export default {
         this.addNewTask(
           this.$options.ACTIVE_TASK,
           this.taskName,
-          1,
+          this.userID,
           this.accessToken
         );
         this.close();
@@ -108,16 +109,6 @@ export default {
       if (this.isTaskNameCorrect) {
         await this.doEditTask(this.task?.id, this.taskName, this.accessToken);
         this.close();
-      }
-    },
-
-    handleKeydown(e) {
-      if (this.isOpen && e.key === "Escape") {
-        this.close();
-      }
-
-      if (e.key === "Enter") {
-        this.addTask();
       }
     },
   },
