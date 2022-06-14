@@ -52,6 +52,8 @@
 
 <script>
 import { useUserStore } from "@/store/user";
+import router from "@/router/router";
+// import MainPageVue from './MainPage.vue';
 // import { storeToRefs } from "pinia";
 
 export default {
@@ -87,9 +89,13 @@ export default {
         this.registrationForm.email,
         this.registrationForm.username,
         this.registrationForm.password
-      ).then((resolve) => {
-        this.getToken(resolve.username, resolve.password);
-      });
+      )
+        .then((resolve) => {
+          this.getToken(resolve.username, resolve.password);
+        })
+        .then(() => {
+          router.push({ name: "mainPage" });
+        });
     },
   },
 };

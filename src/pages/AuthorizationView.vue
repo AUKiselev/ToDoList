@@ -8,10 +8,9 @@
         <el-form :model="authForm" class="auth__auth-form">
           <el-form-item>
             <el-input
-              v-model="authForm.email"
-              type="email"
+              v-model="authForm.username"
               class="auth__input"
-              placeholder="E-mail"
+              placeholder="Логин"
             ></el-input>
           </el-form-item>
           <el-form-item>
@@ -44,20 +43,42 @@
 </template>
 
 <script>
+import { useUserStore } from "@/store/user";
+import router from "@/router/router";
+import { useTasksStore } from "@/store/tasks";
+import { storeToRefs } from "pinia";
 export default {
   name: "authirization-view",
+
+  setup() {
+    const userStore = useUserStore();
+    const tasksStore = useTasksStore();
+    const { accessToken } = storeToRefs(userStore);
+    const { setTasks } = tasksStore;
+    const { getToken } = userStore;
+
+    return { getToken, setTasks, accessToken };
+  },
 
   data() {
     return {
       authForm: {
-        email: "",
+        username: "",
         password: "",
       },
     };
   },
 
   methods: {
-    onSubmit() {},
+    async onSubmit() {
+      await this.getToken(this.authForm.username, this.authForm.password)
+        .then(() => {
+          this.setTasks(this.accessToken);
+        })
+        .then(() => {
+          router.push({ name: "mainPage" });
+        });
+    },
   },
 };
 </script>

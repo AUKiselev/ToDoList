@@ -17,16 +17,8 @@
 </template>
 
 <script>
-import { useTasksStore } from "@/store/tasks";
-
 export default {
   name: "main-header",
-
-  setup() {
-    const tasksStore = useTasksStore();
-
-    return { tasksStore };
-  },
 
   emits: {
     openModal: null,

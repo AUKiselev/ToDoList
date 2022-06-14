@@ -9,6 +9,13 @@ const api = axios.create({
   },
 });
 
+// const apiWithToken = axios.create({
+//   baseURL: BASE_AUTH_URL,
+//   headers: {
+//     accept: "application/json",
+//   },
+// });
+
 export const registrationUser = async (email, username, password) => {
   try {
     await api.post("users/", { email, username, password });
@@ -24,5 +31,13 @@ export const getJwtToken = async (username, password) => {
     return response.data;
   } catch (error) {
     console.log(error.response.data);
+  }
+};
+
+export const verifyToken = async (token) => {
+  try {
+    await api.post("jwt/verify/", { token });
+  } catch (error) {
+    console.error(error.response.data);
   }
 };

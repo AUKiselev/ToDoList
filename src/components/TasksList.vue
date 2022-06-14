@@ -13,19 +13,23 @@
 import { useTasksStore } from "@/store/tasks";
 import { storeToRefs } from "pinia";
 import TaskElement from "@/components/TaskElement.vue";
+import { useUserStore } from "@/store/user";
 
 export default {
   name: "tasks-list",
 
-  ACTIVE_TASK: 0,
-  COMPLETED_TASK: 1,
+  ACTIVE_TASK: false,
+  COMPLETED_TASK: true,
 
   setup() {
     const tasksStore = useTasksStore();
+    const userStore = useUserStore();
+    // const { accessToken } = userStore;
     const { setTasks } = tasksStore;
+    const { accessToken } = storeToRefs(userStore);
     const { tasks } = storeToRefs(tasksStore);
 
-    return { tasks, setTasks };
+    return { tasks, setTasks, accessToken };
   },
 
   components: { TaskElement },
@@ -42,9 +46,9 @@ export default {
     },
   },
 
-  mounted() {
-    this.setTasks();
-  },
+  // mounted() {
+  //   this.setTasks(this.accessToken);
+  // },
 };
 </script>
 

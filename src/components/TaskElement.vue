@@ -35,15 +35,19 @@
 <script>
 import { useTasksStore } from "@/store/tasks";
 import AddOrEditTaskModal from "./AddOrEditTaskModal.vue";
+import { useUserStore } from "@/store/user";
+import { storeToRefs } from "pinia";
 
 export default {
   name: "task-element",
 
   setup() {
     const tasksStore = useTasksStore();
+    const userStore = useUserStore();
+    const { accessToken } = storeToRefs(userStore);
     const { removeTask, toggleCompleteTask } = tasksStore;
 
-    return { removeTask, toggleCompleteTask };
+    return { removeTask, toggleCompleteTask, accessToken };
   },
 
   components: { AddOrEditTaskModal },
@@ -76,16 +80,24 @@ export default {
   },
 
   methods: {
-    changeCompletingTask() {
+    async changeCompletingTask() {
       if (this.task.ready === this.$options.ACTIVE_TASK) {
-        this.toggleCompleteTask(this.task.id, this.$options.COMPLETED_TASK);
+        await this.toggleCompleteTask(
+          this.task.id,
+          this.$options.COMPLETED_TASK,
+          this.accessToken
+        );
       } else if (this.task.ready === this.$options.COMPLETED_TASK) {
-        this.toggleCompleteTask(this.task.id, this.$options.ACTIVE_TASK);
+        await this.toggleCompleteTask(
+          this.task.id,
+          this.$options.ACTIVE_TASK,
+          this.accessToken
+        );
       }
     },
 
-    deleteCurrentTask() {
-      this.removeTask(this.task.id);
+    async deleteCurrentTask() {
+      await this.removeTask(this.task.id, this.accessToken);
     },
   },
 };

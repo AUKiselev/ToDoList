@@ -26,15 +26,19 @@
 
 <script>
 import { useTasksStore } from "@/store/tasks";
+import { useUserStore } from "@/store/user";
+import { storeToRefs } from "pinia";
 
 export default {
   name: "add-or-edit-task-modal",
 
   setup() {
-    const store = useTasksStore();
-    const { addNewTask, doEditTask } = store;
+    const tasksStore = useTasksStore();
+    const userStore = useUserStore();
+    const { accessToken } = storeToRefs(userStore);
+    const { addNewTask, doEditTask } = tasksStore;
 
-    return { addNewTask, doEditTask };
+    return { addNewTask, doEditTask, accessToken };
   },
 
   ACTIVE_TASK: false,
@@ -90,14 +94,19 @@ export default {
 
     addTask() {
       if (this.isTaskNameCorrect) {
-        this.addNewTask(this.$options.ACTIVE_TASK, this.taskName, 1);
+        this.addNewTask(
+          this.$options.ACTIVE_TASK,
+          this.taskName,
+          1,
+          this.accessToken
+        );
         this.close();
       }
     },
 
-    editTask() {
+    async editTask() {
       if (this.isTaskNameCorrect) {
-        this.doEditTask(this.task?.id, this.taskName);
+        await this.doEditTask(this.task?.id, this.taskName, this.accessToken);
         this.close();
       }
     },

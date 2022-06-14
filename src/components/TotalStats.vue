@@ -6,11 +6,11 @@
     <el-row class="toral-stats__content">
       <stats-element
         heading="Активно"
-        :tasksCounter="getActiveTasks.length"
+        :tasksCounter="getActiveTasks ? getActiveTasks.length : 0"
       ></stats-element>
       <stats-element
         heading="Завершено"
-        :tasksCounter="getCompletedTasks.length"
+        :tasksCounter="getCompletedTasks ? getCompletedTasks.length : 0"
       ></stats-element>
     </el-row>
   </div>

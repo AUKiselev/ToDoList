@@ -17,6 +17,7 @@ export const useUserStore = defineStore("auth", {
       const { access, refresh } = await getJwtToken(username, password);
       this.accessToken = access;
       this.refreshToken = refresh;
+      return this.accessToken;
     },
   },
 });
