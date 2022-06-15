@@ -84,20 +84,15 @@ export default {
       if (this.task.ready === this.$options.ACTIVE_TASK) {
         await this.toggleCompleteTask(
           this.task.id,
-          this.$options.COMPLETED_TASK,
-          this.accessToken
+          this.$options.COMPLETED_TASK
         );
       } else if (this.task.ready === this.$options.COMPLETED_TASK) {
-        await this.toggleCompleteTask(
-          this.task.id,
-          this.$options.ACTIVE_TASK,
-          this.accessToken
-        );
+        await this.toggleCompleteTask(this.task.id, this.$options.ACTIVE_TASK);
       }
     },
 
     async deleteCurrentTask() {
-      await this.removeTask(this.task.id, this.accessToken);
+      await this.removeTask(this.task.id);
     },
   },
 };

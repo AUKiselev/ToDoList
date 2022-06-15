@@ -9,7 +9,14 @@
         /></el-icon>
         <ul class="user-block__menu-list">
           <li class="user-block__menu-item">Настройки</li>
-          <li class="user-block__menu-item">Выйти</li>
+          <li class="user-block__menu-item">
+            <router-link
+              class="user-block__menu-link"
+              @click="logout"
+              :to="{ name: 'auth' }"
+              >Выйти</router-link
+            >
+          </li>
         </ul>
       </nav>
     </div>
@@ -25,9 +32,9 @@ export default {
 
   setup() {
     const userStore = useUserStore();
-    const { username } = storeToRefs(userStore);
+    const { username, accessToken, refreshToken } = storeToRefs(userStore);
 
-    return { username };
+    return { username, accessToken, refreshToken };
   },
 
   emits: {
@@ -37,6 +44,11 @@ export default {
   methods: {
     showModal() {
       this.$emit("openModal");
+    },
+
+    logout() {
+      this.accessToken = "";
+      this.refreshToken = "";
     },
   },
 };

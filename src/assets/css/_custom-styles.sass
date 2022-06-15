@@ -21,7 +21,13 @@ h2 + *
   margin-top: 20px
 
 .wrapper
+  position: relative
+  width: 100vw
+  height: 100vh
   color: $gray-background
+
+  @media (max-width: 768px)
+    height: 100%
 
 .el-button
   padding: 10px 25px

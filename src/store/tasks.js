@@ -30,33 +30,33 @@ export const useTasksStore = defineStore("tasks", {
   },
 
   actions: {
-    async setTasks(accessToken) {
-      const tasksList = await getTasks(accessToken);
+    async setTasks() {
+      const tasksList = await getTasks();
       this.tasks = tasksList;
     },
 
-    async removeTask(currentTaskID, accessToken) {
-      await deleteTask(currentTaskID, accessToken).then(() => {
-        this.setTasks(accessToken);
+    async removeTask(currentTaskID) {
+      await deleteTask(currentTaskID).then(() => {
+        this.setTasks();
       });
     },
 
-    async addNewTask(ready = ACTIVE_TASK, title, userID, accessToken) {
-      console.log(accessToken);
-      await addTask(ready, title, userID, accessToken).then(() => {
-        this.setTasks(accessToken);
+    async addNewTask(ready = ACTIVE_TASK, title, userID) {
+      console.log();
+      await addTask(ready, title, userID).then(() => {
+        this.setTasks();
       });
     },
 
-    async toggleCompleteTask(currentTaskID, ready, accessToken) {
-      await doCompleteTask(currentTaskID, ready, accessToken).then(() => {
-        this.setTasks(accessToken);
+    async toggleCompleteTask(currentTaskID, ready) {
+      await doCompleteTask(currentTaskID, ready).then(() => {
+        this.setTasks();
       });
     },
 
-    async doEditTask(currentTaskID, title, accessToken) {
-      await editTask(currentTaskID, title, accessToken).then(() => {
-        this.setTasks(accessToken);
+    async doEditTask(currentTaskID, title) {
+      await editTask(currentTaskID, title).then(() => {
+        this.setTasks();
       });
     },
   },

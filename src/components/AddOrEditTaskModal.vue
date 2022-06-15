@@ -10,24 +10,17 @@
         <p v-else-if="!isNewTask" class="modal__what-to-do">Название задачи</p>
         <el-input
           class="modal__input"
+          @keydown.enter="submitEventHandler"
+          @keydown.esc="close"
           v-model="taskName"
           ref="addTaskInput"
           placeholder="Название задачи"
         />
       </el-row>
       <el-row class="modal__footer">
-        <el-button type="danger" @keydown.esc="close" @click="close"
-          >Отменить</el-button
-        >
-        <el-button v-if="isNewTask" @keydown.enter="addTask" @click="addTask"
-          >Добавить</el-button
-        >
-        <el-button
-          v-else-if="!isNewTask"
-          @keydown.enter="editTask"
-          @click="editTask"
-          >Изменить</el-button
-        >
+        <el-button type="danger" @click="close">Отменить</el-button>
+        <el-button v-if="isNewTask" @click="addTask">Добавить</el-button>
+        <el-button v-else-if="!isNewTask" @click="editTask">Изменить</el-button>
       </el-row>
     </div>
   </div>
@@ -95,21 +88,20 @@ export default {
 
     addTask() {
       if (this.isTaskNameCorrect) {
-        this.addNewTask(
-          this.$options.ACTIVE_TASK,
-          this.taskName,
-          this.userID,
-          this.accessToken
-        );
+        this.addNewTask(this.$options.ACTIVE_TASK, this.taskName, this.userID);
         this.close();
       }
     },
 
-    async editTask() {
+    editTask() {
       if (this.isTaskNameCorrect) {
-        await this.doEditTask(this.task?.id, this.taskName, this.accessToken);
+        this.doEditTask(this.task?.id, this.taskName);
         this.close();
       }
+    },
+
+    submitEventHandler() {
+      this.isNewTask ? this.addTask() : this.editTask();
     },
   },
 

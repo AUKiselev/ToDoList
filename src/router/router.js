@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import MainPage from "@/pages/MainPage.vue";
 import AuthorizationView from "@/pages/AuthorizationView.vue";
 import RegistrationView from "@/pages/RegistrationView.vue";
+// import { useUserStore } from "@/store/user";
 
 // const isAuthenticated = false;
 
@@ -10,9 +11,9 @@ const routes = [
     path: "/",
     name: "mainPage",
     component: MainPage,
-    // Тут нормальная проверка на авторизацию
     // beforeEnter: (to, from) => {
-    //   if (to.name !== "auth" && !isAuthenticated && from) {
+    //   const userStore = useUserStore();
+    //   if (to.name !== "auth" && !userStore.accessToken && from) {
     //     return { name: "auth" };
     //   }
     // },

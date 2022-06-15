@@ -5,7 +5,11 @@
         <h2 class="auth__heading">Вход в аккаунт</h2>
       </el-row>
       <el-row style="width: 100%">
-        <el-form :model="authForm" class="auth__auth-form">
+        <el-form
+          :model="authForm"
+          @keydown.enter="onSubmit"
+          class="auth__auth-form"
+        >
           <el-form-item>
             <el-input
               v-model="authForm.username"
@@ -22,9 +26,11 @@
             ></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button class="auth__submit-button" @click="onSubmit"
-              >Войти</el-button
-            >
+            <div class="auth__submit-button-wrapper">
+              <el-button class="auth__submit-button" @click="onSubmit">
+                Войти
+              </el-button>
+            </div>
           </el-form-item>
         </el-form>
       </el-row>
@@ -73,7 +79,7 @@ export default {
     async onSubmit() {
       await this.getToken(this.authForm.username, this.authForm.password)
         .then(() => {
-          this.setTasks(this.accessToken);
+          this.setTasks();
         })
         .then(() => {
           router.push({ name: "mainPage" });
@@ -84,11 +90,6 @@ export default {
 </script>
 
 <style lang="sass">
-.wrapper
-  width: 100vw
-  height: 100vh
-  background-color: $gray-background
-
 .auth__wrapper
   min-width: 700px
   padding: 20px
@@ -107,12 +108,17 @@ export default {
   box-shadow: $wrapper-box-shadow
   border-radius: 10px
 
+  @media (max-width: 768px)
+    top: 40vh
+    min-width: 90vw
+    padding: 10px
+
 .el-form-item + *
   margin-top: 20px
 
-.auth__submit-button
-  margin: 0 50%
-  transform: translateX(-50%)
+.auth__submit-button-wrapper
+  display: flex
+  justify-content: space-around
 
 .auth__registration-span
   font-family: $nunito

@@ -1,57 +1,41 @@
 import { api } from "./axios";
 
-export const getTasks = async (accessToken) => {
+export const getTasks = async () => {
   try {
-    const response = await api.get("task/", {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
+    const response = await api.get("api/v1/task/");
     return response.data;
   } catch (error) {
     console.error(error);
   }
 };
 
-export const deleteTask = async (id, accessToken) => {
+export const deleteTask = async (id) => {
   try {
-    await api.delete(`task/${id}/`, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
+    await api.delete(`api/v1/task/${id}/`);
   } catch (error) {
     console.error(error);
   }
 };
 
-export const addTask = async (ready, title, user, accessToken) => {
+export const addTask = async (ready, title, user) => {
   try {
-    await api.post(
-      "task/",
-      { ready, title, user },
-      { headers: { Authorization: `Bearer ${accessToken}` } }
-    );
+    await api.post("api/v1/task/", { ready, title, user });
   } catch (error) {
     console.error(error);
   }
 };
 
-export const doCompleteTask = async (id, ready, accessToken) => {
+export const doCompleteTask = async (id, ready) => {
   try {
-    await api.patch(
-      `task/${id}/`,
-      { ready },
-      { headers: { Authorization: `Bearer ${accessToken}` } }
-    );
+    await api.patch(`api/v1/task/${id}/`, { ready });
   } catch (error) {
     console.error(error);
   }
 };
 
-export const editTask = async (id, title, accessToken) => {
+export const editTask = async (id, title) => {
   try {
-    await api.patch(
-      `task/${id}/`,
-      { title },
-      { headers: { Authorization: `Bearer ${accessToken}` } }
-    );
+    await api.patch(`api/v1/task/${id}/`, { title });
   } catch (error) {
     console.error(error);
   }

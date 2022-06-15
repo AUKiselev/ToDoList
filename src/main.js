@@ -7,7 +7,7 @@ import ElementPlus from "element-plus";
 import ru from "element-plus/es/locale/lang/ru";
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 
-const app = createApp(App);
+export const app = createApp(App);
 app.use(createPinia());
 app.use(router);
 app.use(ElementPlus, {

@@ -40,9 +40,11 @@
         </el-row>
         <el-row>
           <el-form-item>
-            <el-button class="registration__submit" @click="onSubmit"
-              >Зарегистрироваться</el-button
-            >
+            <div class="registration__submit-button-wrapper">
+              <el-button class="registration__submit" @click="onSubmit">
+                Зарегистрироваться
+              </el-button>
+            </div>
           </el-form-item>
         </el-row>
       </el-form>
@@ -53,8 +55,6 @@
 <script>
 import { useUserStore } from "@/store/user";
 import router from "@/router/router";
-// import MainPageVue from './MainPage.vue';
-// import { storeToRefs } from "pinia";
 
 export default {
   name: "registration-viev",
@@ -77,12 +77,6 @@ export default {
     };
   },
 
-  // computed: {
-  //   passIsMatch() {
-  //     return this.password === this.repeatPass || this.password;
-  //   },
-  // },
-
   methods: {
     async onSubmit() {
       await this.registration(
@@ -102,11 +96,6 @@ export default {
 </script>
 
 <style lang="sass">
-.wrapper
-  width: 100vw
-  height: 100vh
-  background-color: $gray-background
-
 .registration__wrapper
   min-width: 700px
   padding: 20px
@@ -124,6 +113,11 @@ export default {
 
   box-shadow: $wrapper-box-shadow
   border-radius: 10px
+
+  @media (max-width: 768px)
+    top: 45vh
+    min-width: 90vw
+    padding: 10px
 
 .registration__input .el-input__inner
   padding: 10px 15px
@@ -145,7 +139,8 @@ export default {
 .registration__wrapper .el-form-item__content
   margin-top: 10px
 
-.registration__submit
-  margin: 20px 50% 0 50%
-  transform: translateX(-50%)
+.registration__submit-button-wrapper
+  margin-top: 20px
+  display: flex
+  justify-content: space-around
 </style>
