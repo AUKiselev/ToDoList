@@ -49,9 +49,12 @@ export default {
 
   setup() {
     const userStore = useUserStore();
-    const { username, accessToken, refreshToken } = storeToRefs(userStore);
+    const { getUsername, getUserID, username, accessToken, refreshToken } =
+      storeToRefs(userStore);
 
     return {
+      getUsername,
+      getUserID,
       username,
       accessToken,
       refreshToken,
@@ -63,6 +66,11 @@ export default {
 
   emits: {
     openModal: null,
+  },
+
+  beforeMount() {
+    this.getUsername;
+    this.getUserID;
   },
 
   methods: {

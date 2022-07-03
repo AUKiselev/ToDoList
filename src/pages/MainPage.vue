@@ -13,16 +13,9 @@
 <script>
 import MainHeader from "@/components/MainHeader.vue";
 import AddOrEditTaskModal from "@/components/AddOrEditTaskModal.vue";
-import { useUserStore } from "@/store/user";
 
 export default {
   name: "App",
-
-  setup() {
-    const userStore = useUserStore();
-
-    return { userStore };
-  },
 
   components: {
     MainHeader,

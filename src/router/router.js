@@ -7,7 +7,12 @@ const routes = [
     path: "/",
     name: "mainPage",
     component: MainPage,
-    // beforeEnter: async (to, from) => {
+    beforeEnter: (to, from) => {
+      if (from.path === "/") {
+        return { name: "auth" };
+      }
+    },
+    // beforeEnter: (to, from) => {
     //   const userStore = useUserStore();
     //   if (to.name !== "auth" && !userStore.accessToken && from) {
     //     return { name: "auth" };

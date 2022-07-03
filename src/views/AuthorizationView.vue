@@ -51,16 +51,15 @@
 <script>
 import { useUserStore } from "@/store/user";
 import router from "@/router/router";
-import { storeToRefs } from "pinia";
+// import { storeToRefs } from "pinia";
 export default {
   name: "authirization-view",
 
   setup() {
     const userStore = useUserStore();
-    const { accessToken } = storeToRefs(userStore);
-    const { getToken } = userStore;
+    const { getToken, getUsername, getUserID } = userStore;
 
-    return { getToken, accessToken };
+    return { getToken, getUsername, getUserID };
   },
 
   data() {
@@ -74,11 +73,8 @@ export default {
 
   methods: {
     async onSubmit() {
-      await this.getToken(this.authForm.username, this.authForm.password).then(
-        () => {
-          router.push({ name: "todosPage" });
-        }
-      );
+      await this.getToken(this.authForm.username, this.authForm.password);
+      await router.push({ name: "todosPage" });
     },
   },
 };
