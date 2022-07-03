@@ -8,13 +8,27 @@
           <ArrowDown style="width: 18px; height: 18px; color: #29a19c"
         /></el-icon>
         <ul class="user-block__menu-list">
-          <li class="user-block__menu-item">Настройки</li>
+          <li class="user-block__menu-item">
+            <router-link
+              class="user-block__menu-link"
+              :to="{ name: 'settings' }"
+            >
+              <img
+                class="user-block__menu-link-svg"
+                :src="settingsIcon"
+              />Настройки</router-link
+            >
+          </li>
           <li class="user-block__menu-item">
             <router-link
               class="user-block__menu-link"
               @click="logout"
               :to="{ name: 'auth' }"
-              >Выйти</router-link
+            >
+              <img
+                class="user-block__menu-link-svg"
+                :src="logoutIcon"
+              />Выйти</router-link
             >
           </li>
         </ul>
@@ -26,6 +40,9 @@
 <script>
 import { useUserStore } from "@/store/user";
 import { storeToRefs } from "pinia";
+import settingsIcon from "@/assets/img/sprites/settings.svg";
+import logoutIcon from "@/assets/img/sprites/logout.svg";
+import plusIcon from "@/assets/img/sprites/plus.svg";
 
 export default {
   name: "main-header",
@@ -34,7 +51,14 @@ export default {
     const userStore = useUserStore();
     const { username, accessToken, refreshToken } = storeToRefs(userStore);
 
-    return { username, accessToken, refreshToken };
+    return {
+      username,
+      accessToken,
+      refreshToken,
+      settingsIcon,
+      logoutIcon,
+      plusIcon,
+    };
   },
 
   emits: {
@@ -58,6 +82,10 @@ export default {
 .main-header
   display: flex
   justify-content: space-between
+
+.main-header__add-new-task-button
+  display: flex
+  align-items: center
 
 .user-block
   display: flex
@@ -106,4 +134,11 @@ export default {
 .user-block__menu-item
   &:hover
     color: $main-elements-color
+
+.user-block__menu-link
+  display: flex
+  align-items: center
+  column-gap: 12px
+  color: inherit
+  text-decoration: none
 </style>

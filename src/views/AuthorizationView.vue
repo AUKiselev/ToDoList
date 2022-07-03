@@ -51,19 +51,16 @@
 <script>
 import { useUserStore } from "@/store/user";
 import router from "@/router/router";
-import { useTasksStore } from "@/store/tasks";
 import { storeToRefs } from "pinia";
 export default {
   name: "authirization-view",
 
   setup() {
     const userStore = useUserStore();
-    const tasksStore = useTasksStore();
     const { accessToken } = storeToRefs(userStore);
-    const { setTasks } = tasksStore;
     const { getToken } = userStore;
 
-    return { getToken, setTasks, accessToken };
+    return { getToken, accessToken };
   },
 
   data() {
@@ -77,13 +74,11 @@ export default {
 
   methods: {
     async onSubmit() {
-      await this.getToken(this.authForm.username, this.authForm.password)
-        .then(() => {
-          this.setTasks();
-        })
-        .then(() => {
-          router.push({ name: "mainPage" });
-        });
+      await this.getToken(this.authForm.username, this.authForm.password).then(
+        () => {
+          router.push({ name: "todosPage" });
+        }
+      );
     },
   },
 };
@@ -112,9 +107,6 @@ export default {
     top: 40vh
     min-width: 90vw
     padding: 10px
-
-.el-form-item + *
-  margin-top: 20px
 
 .auth__submit-button-wrapper
   display: flex

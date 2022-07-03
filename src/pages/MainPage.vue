@@ -5,24 +5,29 @@
       <main-header @openModal="doOpenModal"></main-header>
     </el-row>
     <el-row>
-      <total-stats></total-stats>
-    </el-row>
-    <el-row>
-      <tasks-block></tasks-block>
+      <router-view />
     </el-row>
   </div>
 </template>
 
 <script>
-import TasksBlock from "@/components/TasksBlock.vue";
 import MainHeader from "@/components/MainHeader.vue";
 import AddOrEditTaskModal from "@/components/AddOrEditTaskModal.vue";
-import TotalStats from "@/components/TotalStats.vue";
+import { useUserStore } from "@/store/user";
 
 export default {
   name: "App",
 
-  components: { TotalStats, TasksBlock, MainHeader, AddOrEditTaskModal },
+  setup() {
+    const userStore = useUserStore();
+
+    return { userStore };
+  },
+
+  components: {
+    MainHeader,
+    AddOrEditTaskModal,
+  },
 
   data() {
     return { modalIsOpen: false };

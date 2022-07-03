@@ -13,6 +13,9 @@
       ></task-list>
     </el-row>
   </div>
+  <a href="https://cupteam.com.ua/" target="_blank" class="design-link"
+    >Design by CupTeam</a
+  >
 </template>
 
 <script>
@@ -49,4 +52,15 @@ export default {
   border-radius: 10px
 
   overflow-y: auto
+
+.design-link
+  position: relative
+  top: 10px
+  left: 10px
+  font-family: $nunito
+  font-size: $fz14
+  font-weight: $fw400
+  color: $main-text-color
+  &:focus
+    outline: none
 </style>

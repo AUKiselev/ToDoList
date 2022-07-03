@@ -33,6 +33,10 @@ export const useUserStore = defineStore("auth", {
 
     async getToken(username, password) {
       const { access, refresh } = await getJwtToken(username, password);
+
+      localStorage.setItem("accessToken", access);
+      localStorage.setItem("refreshToken", refresh);
+
       this.accessToken = access;
       this.refreshToken = refresh;
 

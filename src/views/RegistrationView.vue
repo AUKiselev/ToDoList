@@ -1,12 +1,16 @@
 <template>
   <div class="wrapper">
-    <div class="registration__wrapper">
+    <div class="registration__wrapper" @keydown.enter="onSubmit">
       <el-row>
         <h2 class="registration__heading">Регистрация</h2>
       </el-row>
-      <el-form :model="registrationForm" style="width: 100%">
+      <el-form
+        class="registration__form"
+        :model="registrationForm"
+        style="width: 100%"
+      >
         <el-row>
-          <el-form-item label="Ваше имя">
+          <el-form-item label="Ваш логин">
             <el-input
               v-model="registrationForm.username"
               class="registration__input"
@@ -57,7 +61,7 @@ import { useUserStore } from "@/store/user";
 import router from "@/router/router";
 
 export default {
-  name: "registration-viev",
+  name: "registration-view",
 
   setup() {
     const userStore = useUserStore();
@@ -83,13 +87,12 @@ export default {
         this.registrationForm.email,
         this.registrationForm.username,
         this.registrationForm.password
-      )
-        .then((resolve) => {
-          this.getToken(resolve.username, resolve.password);
-        })
-        .then(() => {
-          router.push({ name: "mainPage" });
-        });
+      );
+      await this.getToken(
+        this.registrationForm.username,
+        this.registrationForm.password
+      );
+      await router.push({ name: "todosPage" });
     },
   },
 };

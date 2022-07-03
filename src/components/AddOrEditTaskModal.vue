@@ -72,11 +72,7 @@ export default {
     },
 
     isNewTask() {
-      if (!this.task) {
-        return true;
-      } else {
-        return false;
-      }
+      return !this.task;
     },
   },
 

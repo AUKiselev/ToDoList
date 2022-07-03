@@ -15,7 +15,7 @@ export const registrationUser = async (email, username, password) => {
     await authApi.post("users/", { email, username, password });
     return { username, password };
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -24,7 +24,16 @@ export const getJwtToken = async (username, password) => {
     const response = await authApi.post("jwt/create/", { username, password });
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
+  }
+};
+
+export const refreshAccessToken = async (refreshToken) => {
+  try {
+    const response = await authApi.post("jwt/refresh/", { refreshToken });
+    return response.data;
+  } catch (error) {
+    console.error(error);
   }
 };
 
