@@ -38,6 +38,8 @@ export default {
 <style scoped lang="sass">
 .total-stats__wrapper
   padding: 20px
+  max-width: 600px
+  margin: 0 0 0 auto
   display: flex
   flex-direction: column
   row-gap: 20px

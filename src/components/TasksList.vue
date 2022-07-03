@@ -1,11 +1,16 @@
 <template>
   <h2>{{ heading }}</h2>
   <div class="tasks-list__content">
-    <task-element
-      v-for="task in filtredTasksList"
-      :key="task.id"
-      :task="task"
-    />
+    <template v-if="filtredTasksList.length">
+      <task-element
+        v-for="task in filtredTasksList"
+        :key="task.id"
+        :task="task"
+      />
+    </template>
+    <template v-else>
+      <span class="tasks-list__empty-list">Список задач пуст</span>
+    </template>
   </div>
 </template>
 
@@ -24,7 +29,6 @@ export default {
   setup() {
     const tasksStore = useTasksStore();
     const userStore = useUserStore();
-    // const { accessToken } = userStore;
     const { setTasks } = tasksStore;
     const { accessToken } = storeToRefs(userStore);
     const { tasks } = storeToRefs(tasksStore);
@@ -45,10 +49,6 @@ export default {
       required: true,
     },
   },
-
-  // mounted() {
-  //   this.setTasks(this.accessToken);
-  // },
 };
 </script>
 
@@ -57,4 +57,11 @@ export default {
   display: flex
   flex-direction: column
   row-gap: 10px
+
+.tasks-list__empty-list
+  margin-left: 20px
+  font-family: $nunito
+  font-size: $fz14
+  color: $main-text-color
+  opacity: 0.9
 </style>
