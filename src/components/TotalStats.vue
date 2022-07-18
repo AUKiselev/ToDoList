@@ -39,7 +39,7 @@ export default {
 .total-stats__wrapper
   padding: 20px
   max-width: 600px
-  margin: 0 0 0 auto
+  margin: 0 auto 0 0
   display: flex
   flex-direction: column
   row-gap: 20px
@@ -48,6 +48,9 @@ export default {
   box-shadow: 0px 10px 25px rgba(29, 52, 54, 0.08)
 
   border-radius: 10px
+
+  @media (max-width: 900px)
+    max-width: 100%
 
 .toral-stats__content
   display: flex

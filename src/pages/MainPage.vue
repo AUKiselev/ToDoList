@@ -42,6 +42,9 @@ export default {
   height: 100vh
   background-color: $gray-background
 
+  @media (max-width: 900px)
+    padding: 20px 20px
+
 .el-row + *
   margin-top: 30px
 </style>

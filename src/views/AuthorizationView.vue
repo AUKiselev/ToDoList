@@ -51,7 +51,6 @@
 <script>
 import { useUserStore } from "@/store/user";
 import router from "@/router/router";
-// import { storeToRefs } from "pinia";
 export default {
   name: "authirization-view",
 

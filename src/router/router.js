@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import MainPage from "@/pages/MainPage.vue";
-// import { useUserStore } from "@/store/user";
+import { useUserStore } from "@/store/user";
 
 const routes = [
   {
@@ -8,16 +8,11 @@ const routes = [
     name: "mainPage",
     component: MainPage,
     beforeEnter: (to, from) => {
-      if (from.path === "/") {
+      const userStore = useUserStore();
+      if (to.name !== "auth" && !userStore.accessToken && from) {
         return { name: "auth" };
       }
     },
-    // beforeEnter: (to, from) => {
-    //   const userStore = useUserStore();
-    //   if (to.name !== "auth" && !userStore.accessToken && from) {
-    //     return { name: "auth" };
-    //   }
-    // },
     children: [
       {
         path: "/todos",
